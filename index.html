@@ -280,16 +280,19 @@
 
         /* Stats Section - Ultra Clean */
         .stats {
-            background: linear-gradient(135deg, rgba(201, 255, 65, 0.08), rgba(201, 255, 65, 0.02));
-            border-top: 1px solid rgba(201, 255, 65, 0.2);
-            border-bottom: 1px solid rgba(201, 255, 65, 0.2);
+    background: linear-gradient(135deg, rgba(201, 255, 65, 0.08), rgba(201, 255, 65, 0.02));
+    border-top: 1px solid rgba(201, 255, 65, 0.2);
+    border-bottom: 1px solid rgba(201, 255, 65, 0.2);
+    padding: 4rem 0;
         }
 
         .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 4rem;
-        }
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
         .stat-item {
             text-align: center;
@@ -352,26 +355,7 @@
             transform: scale(1.05);
         }
 
-        /* Action Section */
-        .action-section {
-            background: var(--surface-dark);
-            text-align: center;
-        }
-
-        .action-image {
-            max-width: 1000px;
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
-            margin-bottom: 2rem;
-        }
-
-        .action-caption {
-            font-style: italic;
-            opacity: 0.6;
-            font-size: 0.925rem;
-            letter-spacing: 0.01em;
-        }
+        
 
         /* Services Grid */
         .services-grid {
@@ -685,13 +669,25 @@
             }
 
             .stats-grid {
-                gap: 2rem;
-            }
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.stats {
+    padding: 3rem 0;
+}
 
             section {
                 padding: clamp(3rem, 8vw, 5rem) 0;
             }
         }
+        /* Add this new mobile rule for very small screens */
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
 
         /* Micro-interactions */
         .service-card,
@@ -716,6 +712,87 @@
 
         ::-webkit-scrollbar-thumb:hover {
             background: #B8E838;
+        }
+        /* Hero Image Styles */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-image {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-image:hover img {
+            transform: translateY(-10px);
+        }
+
+        .image-accent {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--accent-green), transparent);
+            border-radius: 50%;
+            opacity: 0.6;
+            z-index: -1;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Mobile Updates */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+            
+            .hero-image {
+                max-width: 350px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+            
+            .hero-image {
+                max-width: 280px;
+                margin: 0 auto;
+            }
+            
+            .image-accent {
+                width: 60px;
+                height: 60px;
+                top: -5px;
+                right: -5px;
+            }
         }
     </style>
 </head>
@@ -748,10 +825,18 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Elite Squash<br>Performance</h1>
-            <div class="subtitle">World-Class Coaching Excellence</div>
-            <p class="description">Former World #12 with 28 years of competitive excellence and 15 years of transformational coaching. Specializing in developing champions for college recruitment and professional careers.</p>
-            <a href="#contact" class="cta-button" onclick="scrollToSection('contact')">Begin Your Journey</a>
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <h1>Elite Squash<br>Performance</h1>
+                    <div class="subtitle">World-Class Coaching Excellence</div>
+                    <p class="description">Former World #12 with 28 years of competitive excellence and 15 years of transformational coaching. Specializing in developing champions for college recruitment and professional careers.</p>
+                    <a href="#contact" class="cta-button" onclick="scrollToSection('contact')">Begin Your Journey</a>
+                </div>
+                <div class="hero-image">
+                    <img src="images/img_0809la.jpg" alt="Elite squash player ready for championship performance">
+                    <div class="image-accent"></div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -779,30 +864,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-content">
-                    <h2 class="section-title">The Journey</h2>
-                    <p class="about-text">From the courts of Botswana with limited resources to the world's elite stage at #12 ranking. This unique journey shaped an understanding of what truly drives championship performance.</p>
-                    <p class="about-text">Surrounded by greatness during my professional years in England, I absorbed the wisdom of champions, world-class coaches, and mentors who understood the intricate details of peak performance.</p>
-                    <p class="about-text">Today, this knowledge transforms ambitious players into champions through systematic, proven methodologies that create lasting excellence.</p>
-                </div>
-                <div class="about-image">
-                    <img src="images/image8.jpeg" alt="Alister Walker Professional Portrait">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Action Section -->
-    <section class="action-section">
-        <div class="container">
-           <img src="images/img_0809la.jpg" alt="Elite squash performance in action" class="action-image">
-            <p class="action-caption">Championship mindset in every movement</p>
-        </div>
-    </section>
+    
 
     <!-- Services Section -->
     <section id="services">
