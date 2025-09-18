@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Itineraries - Alister Walker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #212121;
+            --accent-green: #C9FF41;
+            --text-light: #E7E7E7;
+            --text-muted: #A0A0A0;
+            --surface-dark: #1A1A1A;
+            --surface-elevated: #2A2A2A;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.7;
+            font-weight: 400;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(33, 33, 33, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(201, 255, 65, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .logo {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--accent-green);
+            letter-spacing: -0.02em;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.875rem;
+            letter-spacing: 0.01em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-green);
+        }
+
+        .nav-links a.active {
+            color: var(--accent-green);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 8rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        /* Header Section */
+        .page-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .page-category {
+            font-size: 0.875rem;
+            color: var(--accent-green);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .page-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            letter-spacing: -0.03em;
+        }
+
+        .page-subtitle {
+            font-size: 1.25rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            max-width: 800px;
+            line-height: 1.7;
+            letter-spacing: -0.01em;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Itinerary Cards */
+        .itineraries-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .itinerary-card {
+            display: grid;
+            grid-template-columns: 400px 1fr 280px;
+            background: var(--surface-elevated);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(201, 255, 65, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .itinerary-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(201, 255, 65, 0.15);
+            border-color: rgba(201, 255, 65, 0.3);
+        }
+
+        .itinerary-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .itinerary-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .itinerary-card:hover .itinerary-image img {
+            transform: scale(1.05);
+        }
+
+        .itinerary-content {
+            padding: 3rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .itinerary-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .itinerary-locations {
+            color: var(--accent-green);
+            font-weight: 500;
+            font-size: 0.925rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.02em;
+        }
+
+        .accommodations-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .accommodations-title {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .accommodations-list {
+            font-size: 0.925rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        .itinerary-details {
+            padding: 3rem 2rem;
+            background: rgba(201, 255, 65, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .duration {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .duration-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .view-itinerary-btn {
+            background: var(--accent-green);
+            color: var(--primary-dark);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .view-itinerary-btn:hover {
+            background: #B8E838;
+            transform: translateY(-2px);
+        }
+
+        /* Bottom CTA */
+        .bottom-cta {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid rgba(201, 255, 65, 0.1);
+            margin-top: 4rem;
+        }
+
+        .see-all-btn {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent-green);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.925rem;
+            padding: 0.75rem 2rem;
+            border: 1px solid var(--accent-green);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        .see-all-btn:hover {
+            background: var(--accent-green);
+            color: var(--primary-dark);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .itinerary-card {
+                grid-template-columns: 1fr;
+            }
+            
+            .itinerary-image {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .itinerary-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .itinerary-details {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Alister Walker</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="itineraries.html" class="active">Itineraries</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Header -->
+            <div class="page-header">
+                <div class="page-category">Train with Excellence</div>
+                <h1 class="page-title">Elite Squash Safaris</h1>
+                <p class="page-subtitle">Immersive training experiences combining world-class coaching with extraordinary destinations. Transform your game while exploring iconic squash venues and cultures around the globe.</p>
+            </div>
+
+            <!-- Itineraries -->
+            <div class="itineraries-grid">
+                
+                <!-- African Adventure Safari -->
+                <div class="itinerary-card">
+                    <div class="itinerary-image">
+                        <img src="images/african-adventure.jpg" alt="Elite African Adventure" onerror="this.src='https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=400&h=300&fit=crop'">
+                    </div>
+                    <div class="itinerary-content">
+                        <h2 class="itinerary-title">An Elite African Adventure from Botswana to Cape Town</h2>
+                        <div class="itinerary-locations">Johannesburg • Linyanti • Okavango Delta • Cape Town</div>
+                        <div class="accommodations-section">
+                            <div class="accommodations-title">Accommodations</div>
+                            <div class="accommodations-list">
+                                Intercontinental Johannesburg O.R. Tambo Airport<br>
+                                Wilderness King's Pool<br>
+                                Wilderness Vumbura Plains North<br>
+                                Mount Nelson, A Belmond Hotel, Cape Town
+                            </div>
+                        </div>
+                    </div>
+                    <div class="itinerary-details">
+                        <div class="duration">9</div>
+                        <div class="duration-label">nights</div>
+                        <a href="https://itrvl.com/client/itineraries/687811c9007231005b5aa6c1?token=BBGuD4gyQJ6IfsiYajKPbw1yG04bfhjdXEnehxtJ9G72atdudl5XRSaD1AhAsLbE" class="view-itinerary-btn" target="_blank">View Itinerary</a>
+                    </div>
+                </div>
+
+                <!-- Elite European Safari -->
+                <div class="itinerary-card">
+                    <div class="itinerary-image">
+                        <img src="images/european-adventure.jpg" alt="Elite European Adventure" onerror="this.src='https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=400&h=300&fit=crop'">
+                    </div>
+                    <div class="itinerary-content">
+                        <h2 class="itinerary-title">Elite European Squash Academy Tour</h2>
+                        <div class="itinerary-locations">London • Paris • Geneva • Rome</div>
+                        <div class="accommodations-section">
+                            <div class="accommodations-title">Accommodations</div>
+                            <div class="accommodations-list">
+                                The Langham, London<br>
+                                Le Bristol Paris<br>
+                                Hotel d'Angleterre Geneva<br>
+                                Hotel de Russie, Rome
+                            </div>
+                        </div>
+                    </div>
+                    <div class="itinerary-details">
+                        <div class="duration">12</div>
+                        <div class="duration-label">nights</div>
+                        <a href="https://itrvl.com/client/itineraries/687811c9007231005b5aa6c1?token=BBGuD4gyQJ6IfsiYajKPbw1yG04bfhjdXEnehxtJ9G72atdudl5XRSaD1AhAsLbE" class="view-itinerary-btn" target="_blank">View Itinerary</a>
+                    </div>
+                </div>
+
+                <!-- Asian Excellence Safari -->
+                <div class="itinerary-card">
+                    <div class="itinerary-image">
+                        <img src="images/asian-adventure.jpg" alt="Asian Excellence Safari" onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop'">
+                    </div>
+                    <div class="itinerary-content">
+                        <h2 class="itinerary-title">Asian Excellence Training Safari</h2>
+                        <div class="itinerary-locations">Hong Kong • Singapore • Kuala Lumpur • Bangkok</div>
+                        <div class="accommodations-section">
+                            <div class="accommodations-title">Accommodations</div>
+                            <div class="accommodations-list">
+                                The Peninsula Hong Kong<br>
+                                Raffles Singapore<br>
+                                The Majestic Hotel Kuala Lumpur<br>
+                                The Oriental Bangkok
+                            </div>
+                        </div>
+                    </div>
+                    <div class="itinerary-details">
+                        <div class="duration">14</div>
+                        <div class="duration-label">nights</div>
+                        <a href="https://itrvl.com/client/itineraries/687811c9007231005b5aa6c1?token=BBGuD4gyQJ6IfsiYajKPbw1yG04bfhjdXEnehxtJ9G72atdudl5XRSaD1AhAsLbE" class="view-itinerary-btn" target="_blank">View Itinerary</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom CTA -->
+            <div class="bottom-cta">
+                <a href="index.html#contact" class="see-all-btn">Request Custom Safari</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
