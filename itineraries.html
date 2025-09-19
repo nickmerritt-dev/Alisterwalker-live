@@ -99,7 +99,7 @@
         /* Header Section */
         .page-header {
             text-align: center;
-            margin-bottom: 5rem;
+            margin-bottom: 3rem;
         }
 
         .page-category {
@@ -121,34 +121,39 @@
         }
 
         .page-subtitle {
-            font-size: 1.25rem;
+            font-size: 1.125rem;
             font-weight: 300;
-            margin-bottom: 3rem;
-            opacity: 0.8;
-            max-width: 800px;
-            line-height: 1.7;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 900px;
+            line-height: 1.6;
             letter-spacing: -0.01em;
             margin-left: auto;
             margin-right: auto;
         }
 
-        /* Itinerary Cards */
+        .search-info {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        /* Itineraries Grid */
         .itineraries-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
             margin-bottom: 4rem;
         }
 
         .itinerary-card {
-            display: grid;
-            grid-template-columns: 400px 1fr 280px;
             background: var(--surface-elevated);
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
             border: 1px solid rgba(201, 255, 65, 0.1);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
+            cursor: pointer;
         }
 
         .itinerary-card:hover {
@@ -159,6 +164,7 @@
 
         .itinerary-image {
             position: relative;
+            height: 250px;
             overflow: hidden;
         }
 
@@ -173,93 +179,111 @@
             transform: scale(1.05);
         }
 
+        .duration-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(33, 33, 33, 0.9);
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
         .itinerary-content {
-            padding: 3rem 2.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            padding: 1.5rem;
         }
 
         .itinerary-title {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--text-light);
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
             letter-spacing: -0.02em;
         }
 
-        .itinerary-locations {
-            color: var(--accent-green);
-            font-weight: 500;
-            font-size: 0.925rem;
+        .price-section {
             margin-bottom: 1rem;
-            letter-spacing: 0.02em;
         }
 
-        .accommodations-section {
+        .price-from {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .price {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--accent-green);
+            margin-top: 0.25rem;
+        }
+
+        .price-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .destinations-section {
             margin-bottom: 1.5rem;
         }
 
-        .accommodations-title {
-            font-size: 0.85rem;
+        .destinations-label {
+            font-size: 0.8rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            margin-bottom: 0.75rem;
-        }
-
-        .accommodations-list {
-            font-size: 0.925rem;
-            color: var(--text-light);
-            line-height: 1.5;
-        }
-
-        .itinerary-details {
-            padding: 3rem 2rem;
-            background: rgba(201, 255, 65, 0.05);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .duration {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent-green);
             margin-bottom: 0.5rem;
         }
 
-        .duration-label {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        .destinations-list {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.4;
         }
 
-        .view-itinerary-btn {
-            background: var(--accent-green);
-            color: var(--primary-dark);
-            border: none;
-            padding: 1rem 2rem;
+        .training-highlights {
+            margin-bottom: 1.5rem;
+        }
+
+        .training-badge {
+            background: rgba(201, 255, 65, 0.1);
+            color: var(--accent-green);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            border: 1px solid rgba(201, 255, 65, 0.3);
+        }
+
+        .view-details-btn {
+            width: 100%;
+            background: transparent;
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+            padding: 0.75rem 1.5rem;
             border-radius: 8px;
             font-weight: 600;
             font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
-            display: inline-block;
+            display: block;
             text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
         }
 
-        .view-itinerary-btn:hover {
-            background: #B8E838;
-            transform: translateY(-2px);
+        .view-details-btn:hover {
+            background: var(--accent-green);
+            color: var(--primary-dark);
         }
 
         /* Bottom CTA */
@@ -270,37 +294,178 @@
             margin-top: 4rem;
         }
 
-        .see-all-btn {
+        .custom-trip-btn {
             display: inline-flex;
             align-items: center;
-            color: var(--accent-green);
+            background: var(--accent-green);
+            color: var(--primary-dark);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.925rem;
-            padding: 0.75rem 2rem;
-            border: 1px solid var(--accent-green);
-            border-radius: 50px;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
             transition: all 0.3s ease;
             letter-spacing: 0.02em;
             text-transform: uppercase;
+            border: none;
+            cursor: pointer;
         }
 
-        .see-all-btn:hover {
+        .custom-trip-btn:hover {
+            background: #B8E838;
+            transform: translateY(-2px);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--surface-elevated);
+            border-radius: 16px;
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 600px;
+            border: 1px solid rgba(201, 255, 65, 0.2);
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--accent-green);
+            background: rgba(201, 255, 65, 0.1);
+        }
+
+        .modal-header {
+            margin-bottom: 2rem;
+        }
+
+        .modal-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .enquiry-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            background: var(--surface-dark);
+            border: 1px solid rgba(201, 255, 65, 0.2);
+            border-radius: 8px;
+            padding: 0.875rem 1rem;
+            color: var(--text-light);
+            font-family: inherit;
+            font-size: 0.925rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px rgba(201, 255, 65, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
             background: var(--accent-green);
             color: var(--primary-dark);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.925rem;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .form-submit:hover {
+            background: #B8E838;
         }
 
         /* Mobile Responsive */
-        @media (max-width: 1024px) {
-            .itinerary-card {
-                grid-template-columns: 1fr;
-            }
-            
-            .itinerary-image {
-                height: 250px;
-            }
-        }
-
         @media (max-width: 768px) {
             .nav-container {
                 padding: 0 1.5rem;
@@ -314,12 +479,19 @@
                 padding: 0 1.5rem;
             }
 
-            .itinerary-content {
-                padding: 2rem 1.5rem;
+            .itineraries-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
-            .itinerary-details {
-                padding: 2rem 1.5rem;
+            .modal-content {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
         }
     </style>
@@ -343,86 +515,107 @@
         <div class="container">
             <!-- Header -->
             <div class="page-header">
-                <div class="page-category">Train with Excellence</div>
-                <h1 class="page-title">Elite Squash Safaris</h1>
-                <p class="page-subtitle">Immersive training experiences combining world-class coaching with extraordinary destinations. Transform your game while exploring iconic squash venues and cultures around the globe.</p>
+                <div class="page-category">Elite Training</div>
+                <h1 class="page-title">Squash Safari Adventures</h1>
+                <p class="page-subtitle">Pair your elite squash training with the ultimate African safari experience, guided by someone who grew up in Botswana. These exclusive itineraries combine world-class coaching at premier facilities with authentic wildlife encounters and luxury accommodations across Southern Africa's most spectacular destinations.</p>
             </div>
 
-            <!-- Itineraries -->
+            <!-- Itineraries Grid -->
             <div class="itineraries-grid">
                 
-                <!-- African Adventure Safari -->
+                <!-- Safari Option A -->
                 <div class="itinerary-card">
                     <div class="itinerary-image">
-                        <img src="images/african-adventure.jpg" alt="Elite African Adventure" onerror="this.src='https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=400&h=300&fit=crop'">
+                        <img src="images/optiona.png" alt="Okavango Discovery Safari" onerror="this.src='https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=400&h=300&fit=crop'">
+                        <div class="duration-badge">10 DAYS</div>
                     </div>
                     <div class="itinerary-content">
-                        <h2 class="itinerary-title">An Elite African Adventure from Botswana to Cape Town</h2>
-                        <div class="itinerary-locations">Johannesburg • Linyanti • Okavango Delta • Cape Town</div>
-                        <div class="accommodations-section">
-                            <div class="accommodations-title">Accommodations</div>
-                            <div class="accommodations-list">
-                                Intercontinental Johannesburg O.R. Tambo Airport<br>
-                                Wilderness King's Pool<br>
-                                Wilderness Vumbura Plains North<br>
-                                Mount Nelson, A Belmond Hotel, Cape Town
-                            </div>
+                        <h2 class="itinerary-title">Okavango Discovery Safari</h2>
+                        <div class="price-section">
+                            <div class="price-from">From</div>
+                            <div class="price">US$18,500</div>
+                            <div class="price-note">per person sharing</div>
                         </div>
-                    </div>
-                    <div class="itinerary-details">
-                        <div class="duration">9</div>
-                        <div class="duration-label">nights</div>
-                        <a href="https://itrvl.com/client/itineraries/687811c9007231005b5aa6c1?token=BBGuD4gyQJ6IfsiYajKPbw1yG04bfhjdXEnehxtJ9G72atdudl5XRSaD1AhAsLbE" class="view-itinerary-btn" target="_blank">View Itinerary</a>
+                        <div class="destinations-section">
+                            <div class="destinations-label">Destinations</div>
+                            <div class="destinations-list">Johannesburg, Kings Pool, Vumbura Plains, Cape Town</div>
+                        </div>
+                        <div class="training-highlights">
+                            <div class="training-badge">⚡ Elite Training in Cape Town</div>
+                        </div>
+                        <a href="#" class="view-details-btn">View Itinerary</a>
                     </div>
                 </div>
 
-                <!-- Elite European Safari -->
+                <!-- Safari Option B -->
                 <div class="itinerary-card">
                     <div class="itinerary-image">
-                        <img src="images/european-adventure.jpg" alt="Elite European Adventure" onerror="this.src='https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=400&h=300&fit=crop'">
+                        <img src="images/optionb.png" alt="Victoria Falls Adventure Safari" onerror="this.src='https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&h=300&fit=crop'">
+                        <div class="duration-badge">11 DAYS</div>
                     </div>
                     <div class="itinerary-content">
-                        <h2 class="itinerary-title">Elite European Squash Academy Tour</h2>
-                        <div class="itinerary-locations">London • Paris • Geneva • Rome</div>
-                        <div class="accommodations-section">
-                            <div class="accommodations-title">Accommodations</div>
-                            <div class="accommodations-list">
-                                The Langham, London<br>
-                                Le Bristol Paris<br>
-                                Hotel d'Angleterre Geneva<br>
-                                Hotel de Russie, Rome
-                            </div>
+                        <h2 class="itinerary-title">Victoria Falls Adventure Safari</h2>
+                        <div class="price-section">
+                            <div class="price-from">From</div>
+                            <div class="price">US$22,000</div>
+                            <div class="price-note">per person sharing</div>
                         </div>
-                    </div>
-                    <div class="itinerary-details">
-                        <div class="duration">12</div>
-                        <div class="duration-label">nights</div>
-                        <a href="https://itrvl.com/client/itineraries/687811c9007231005b5aa6c1?token=BBGuD4gyQJ6IfsiYajKPbw1yG04bfhjdXEnehxtJ9G72atdudl5XRSaD1AhAsLbE" class="view-itinerary-btn" target="_blank">View Itinerary</a>
+                        <div class="destinations-section">
+                            <div class="destinations-label">Destinations</div>
+                            <div class="destinations-list">Johannesburg, Victoria Falls, Vumbura Plains, Cape Town</div>
+                        </div>
+                        <div class="training-highlights">
+                            <div class="training-badge">⚡ Training at Victoria Falls & Cape Town</div>
+                        </div>
+                        <a href="#" class="view-details-btn">View Itinerary</a>
                     </div>
                 </div>
 
-                <!-- Asian Excellence Safari -->
+                <!-- Safari Option C -->
                 <div class="itinerary-card">
                     <div class="itinerary-image">
-                        <img src="images/asian-adventure.jpg" alt="Asian Excellence Safari" onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop'">
+                        <img src="images/optionc.png" alt="Luxury Wildlife Experience Safari" onerror="this.src='https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=400&h=300&fit=crop'">
+                        <div class="duration-badge">12 DAYS</div>
                     </div>
                     <div class="itinerary-content">
-                        <h2 class="itinerary-title">Asian Excellence Training Safari</h2>
-                        <div class="itinerary-locations">Hong Kong • Singapore • Kuala Lumpur • Bangkok</div>
-                        <div class="accommodations-section">
-                            <div class="accommodations-title">Accommodations</div>
-                            <div class="accommodations-list">
-                                The Peninsula Hong Kong<br>
-                                Raffles Singapore<br>
-                                The Majestic Hotel Kuala Lumpur<br>
-                                The Oriental Bangkok
-                            </div>
+                        <h2 class="itinerary-title">Luxury Wildlife Experience Safari</h2>
+                        <div class="price-section">
+                            <div class="price-from">From</div>
+                            <div class="price">US$28,500</div>
+                            <div class="price-note">per person sharing</div>
                         </div>
+                        <div class="destinations-section">
+                            <div class="destinations-label">Destinations</div>
+                            <div class="destinations-list">Johannesburg, Kings Pool, Mombo, Cape Town</div>
+                        </div>
+                        <div class="training-highlights">
+                            <div class="training-badge">⚡ Training in Johannesburg & Cape Town</div>
+                        </div>
+                        <a href="#" class="view-details-btn">View Itinerary</a>
                     </div>
-                    <div class="itinerary-details">
-                        <div class="duration">14</div>
-                        <div class="duration-label">nights</div>
-                        <a href="https://itrvl.com/client/itineraries/687811c9007231005b5aa6c1?token=BBGuD4gyQJ6IfsiYajKPbw1yG04bfhjdXEnehxtJ9G72atdudl5XRSaD1AhAsLbE" class="view-itinerary-btn" target="_blank">View Itinerary</a>
+                </div>
+
+                <!-- Safari Option D -->
+                <div class="itinerary-card">
+                    <div class="itinerary-image">
+                        <img src="images/optiond.png" alt="Ultimate Southern Africa Safari" onerror="this.src='https://images.unsplash.com/photo-1534177616072-ef7dc120449d?w=400&h=300&fit=crop'">
+                        <div class="duration-badge">14 DAYS</div>
+                    </div>
+                    <div class="itinerary-content">
+                        <h2 class="itinerary-title">Ultimate Southern Africa Safari</h2>
+                        <div class="price-section">
+                            <div class="price-from">From</div>
+                            <div class="price">US$32,000</div>
+                            <div class="price-note">per person sharing</div>
+                        </div>
+                        <div class="destinations-section">
+                            <div class="destinations-label">Destinations</div>
+                            <div class="destinations-list">Johannesburg, Victoria Falls, Linkwasha, Vumbura Plains, Cape Town</div>
+                        </div>
+                        <div class="training-highlights">
+                            <div class="training-badge">⚡ Training at Victoria Falls & Cape Town</div>
+                        </div>
+                        <a href="#" class="view-details-btn">View Itinerary</a>
                     </div>
                 </div>
 
@@ -430,9 +623,105 @@
 
             <!-- Bottom CTA -->
             <div class="bottom-cta">
-                <a href="index.html#contact" class="see-all-btn">Request Custom Safari</a>
+                <button class="custom-trip-btn" onclick="openModal()">Request Custom Trip</button>
             </div>
         </div>
     </main>
+
+    <!-- Enquiry Modal -->
+    <div id="enquiryModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h2 class="modal-title">Request Custom Trip</h2>
+                <p class="modal-subtitle">Let's design the perfect squash safari adventure tailored to your preferences</p>
+            </div>
+            <form class="enquiry-form" onsubmit="submitEnquiry(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">First Name</label>
+                        <input type="text" class="form-input" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Last Name</label>
+                        <input type="text" class="form-input" name="lastName" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" class="form-input" name="phone">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Preferred Duration</label>
+                        <select class="form-select" name="duration">
+                            <option value="">Select duration</option>
+                            <option value="7-10 days">7-10 days</option>
+                            <option value="10-14 days">10-14 days</option>
+                            <option value="14+ days">14+ days</option>
+                            <option value="flexible">Flexible</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Travel Dates</label>
+                        <input type="text" class="form-input" name="travelDates" placeholder="When would you like to travel?">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tell us about your ideal trip</label>
+                    <textarea class="form-textarea" name="message" placeholder="What would you like to include in your custom squash safari? Any specific destinations, training focuses, or experiences you're interested in?"></textarea>
+                </div>
+                <button type="submit" class="form-submit">Send Enquiry</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('enquiryModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('enquiryModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('enquiryModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        function submitEnquiry(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            // Here you would typically send the data to your server
+            console.log('Enquiry data:', data);
+            
+            // For now, just show an alert and close modal
+            alert('Thank you for your enquiry! We will get back to you soon.');
+            closeModal();
+            event.target.reset();
+        }
+    </script>
 </body>
 </html>

@@ -351,6 +351,8 @@
                 0 1px 0 rgba(255, 255, 255, 0.2) inset;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+            border: none;
         }
 
         .cta-button::before {
@@ -375,6 +377,153 @@
                 0 12px 48px rgba(201, 255, 65, 0.4),
                 0 4px 20px rgba(201, 255, 65, 0.2),
                 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--surface-elevated);
+            border-radius: 16px;
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 600px;
+            border: 1px solid rgba(201, 255, 65, 0.2);
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--accent-green);
+            background: rgba(201, 255, 65, 0.1);
+        }
+
+        .modal-header {
+            margin-bottom: 2rem;
+        }
+
+        .modal-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .form-input,
+        .form-textarea {
+            background: var(--surface-dark);
+            border: 1px solid rgba(201, 255, 65, 0.2);
+            border-radius: 8px;
+            padding: 0.875rem 1rem;
+            color: var(--text-light);
+            font-family: inherit;
+            font-size: 0.925rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px rgba(201, 255, 65, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            background: var(--accent-green);
+            color: var(--primary-dark);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.925rem;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .form-submit:hover {
+            background: #B8E838;
         }
 
         /* Container */
@@ -773,59 +922,111 @@
             margin-top: 0.25rem;
         }
 
-        /* Enhanced Contact Section */
-        .contact {
-            background: linear-gradient(135deg, rgba(201, 255, 65, 0.15), rgba(201, 255, 65, 0.05));
-            text-align: center;
-        }
+        /* Redesigned Contact Section */
+.contact {
+    background: linear-gradient(135deg, rgba(201, 255, 65, 0.08), rgba(201, 255, 65, 0.03));
+    border-top: 1px solid rgba(201, 255, 65, 0.15);
+    padding: var(--space-3xl) 0 var(--space-2xl);
+}
 
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--space-2xl);
-            margin: var(--space-2xl) 0;
-        }
+.contact-content {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--space-3xl);
+    align-items: start;
+}
 
-        .contact-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: var(--space-m);
-        }
+.contact-info {
+    padding-right: var(--space-xl);
+}
 
-        .contact-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--accent-green), #B8E838);
-            color: var(--primary-dark);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 600;
-            box-shadow: 
-                0 8px 32px rgba(201, 255, 65, 0.3),
-                0 2px 0 rgba(255, 255, 255, 0.2) inset;
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-        }
+.contact-title {
+    font-family: 'Clash Display', 'Inter', sans-serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--accent-green);
+    margin-bottom: var(--space-l);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
 
-        .contact-icon:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 
-                0 12px 48px rgba(201, 255, 65, 0.4),
-                0 4px 0 rgba(255, 255, 255, 0.3) inset;
-        }
+.contact-description {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: var(--space-2xl);
+    opacity: 0.85;
+    max-width: 500px;
+}
 
-        .contact-label {
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
 
-        .contact-value {
-            opacity: 0.8;
-            font-size: 0.925rem;
-        }
+.contact-method {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-m);
+}
+
+.contact-svg {
+    width: 24px;
+    height: 24px;
+    color: var(--accent-green);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.contact-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.contact-value {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+.social-section .contact-label {
+    margin-bottom: var(--space-m);
+}
+
+.social-links {
+    display: flex;
+    gap: var(--space-m);
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: rgba(201, 255, 65, 0.1);
+    border: 1px solid rgba(201, 255, 65, 0.3);
+    border-radius: 12px;
+    color: var(--accent-green);
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.social-link:hover {
+    background: var(--accent-green);
+    color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(201, 255, 65, 0.3);
+}
+
+.social-link svg {
+    width: 24px;
+    height: 24px;
+}
 
         /* Footer */
         footer {
@@ -957,6 +1158,16 @@
             section {
                 padding: var(--space-2xl) 0;
             }
+
+            .modal-content {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1070,7 +1281,7 @@
                     <h1>Elite Squash<br>Performance</h1>
                     <div class="subtitle">World-Class Coaching Excellence</div>
                     <p class="description">Former World #12 with 28 years of competitive excellence and 15 years of transformational coaching. Specializing in developing champions for college recruitment and professional careers.</p>
-                    <a href="#contact" class="cta-button" onclick="scrollToSection('contact')">Begin Your Journey</a>
+                    <button class="cta-button" onclick="openModal()">Begin Your Journey</button>
                 </div>
                 <div class="hero-image">
                     <img src="images/img_0809la.jpg" alt="Elite squash player ready for championship performance">
@@ -1079,6 +1290,38 @@
             </div>
         </div>
     </section>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h2 class="modal-title">Get In Touch</h2>
+                <p class="modal-subtitle">Ready to elevate your game? Let's discuss your squash journey and how elite coaching can transform your performance.</p>
+            </div>
+            <form class="contact-form" onsubmit="submitContact(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-input" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" name="email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <input type="tel" class="form-input" name="phone">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Message</label>
+                    <textarea class="form-textarea" name="message" placeholder="Tell me about your current level, goals, and what you're looking to achieve through elite coaching..." required></textarea>
+                </div>
+                <button type="submit" class="form-submit">Send Message</button>
+            </form>
+        </div>
+    </div>
 
     <!-- Stats Section -->
     <section class="stats">
@@ -1249,32 +1492,50 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Begin Your Transformation</h2>
-            <p class="section-subtitle">Ready to unlock your championship potential? Connect with elite coaching excellence and start your journey to squash mastery.</p>
-            <div class="contact-grid">
-                <div class="contact-item">
-                    <div class="contact-icon">📧</div>
-                    <div class="contact-label">Elite Consultation</div>
-                    <div class="contact-value">info@alister-walker.com</div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">📱</div>
-                    <div class="contact-label">Direct Contact</div>
-                    <div class="contact-value">Available upon inquiry</div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">🏆</div>
-                    <div class="contact-label">Training Locations</div>
-                    <div class="contact-value">US Elite Facilities</div>
-                </div>
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="contact-content">
+            <div class="contact-info">
+                <h2 class="contact-title">Ready to Elevate Your Game?</h2>
+                <p class="contact-description">Connect with elite coaching excellence and start your transformation today.</p>
+                <button class="cta-button" onclick="openModal()">Schedule Consultation</button>
             </div>
-            <div style="margin-top: 3rem;">
-                <a href="mailto:info@alister-walker.com" class="cta-button">Schedule Consultation</a>
+            
+            <div class="contact-details">
+                <div class="contact-method">
+                    <svg class="contact-svg" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    <div>
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value">alisterwalker@icloud.com</div>
+                    </div>
+                </div>
+                
+                <div class="contact-method">
+                    <svg class="contact-svg" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <div>
+                        <div class="contact-label">Training Locations</div>
+                        <div class="contact-value">US Elite Facilities</div>
+                    </div>
+                </div>
+                
+                <div class="social-section">
+                    <div class="contact-label">Follow the Journey</div>
+                    <div class="social-links">
+                        <a href="https://instagram.com/alisterwalker" class="social-link" target="_blank" rel="noopener">
+                            <svg fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer>
@@ -1284,6 +1545,47 @@
     </footer>
 
     <script>
+        // Modal functions
+        function openModal() {
+            document.getElementById('contactModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('contactModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('contactModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        function submitContact(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            // Here you would typically send the data to your server
+            console.log('Contact data:', data);
+            
+            // For now, just show an alert and close modal
+            alert('Thank you for your message! I will get back to you soon.');
+            closeModal();
+            event.target.reset();
+        }
+
         // Mobile menu toggle
         function toggleMobileMenu() {
             const mobileNav = document.getElementById('mobileNav');
