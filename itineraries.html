@@ -30,16 +30,16 @@
             overflow-x: hidden;
         }
 
-        /* Navigation */
+        /* Navigation - Simplified for performance */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
             background: rgba(33, 33, 33, 0.95);
-            backdrop-filter: blur(20px);
             z-index: 1000;
             padding: 1.5rem 0;
             border-bottom: 1px solid rgba(201, 255, 65, 0.1);
+            /* Removed backdrop-filter for better performance */
         }
 
         .nav-container {
@@ -71,7 +71,7 @@
             font-weight: 400;
             font-size: 0.875rem;
             letter-spacing: 0.01em;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: color 0.2s ease;
             cursor: pointer;
             position: relative;
         }
@@ -132,13 +132,7 @@
             margin-right: auto;
         }
 
-        .search-info {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-bottom: 3rem;
-        }
-
-        /* Itineraries Grid */
+        /* Itineraries Grid - Performance optimized */
         .itineraries-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -151,17 +145,20 @@
             border-radius: 16px;
             overflow: hidden;
             border: 1px solid rgba(201, 255, 65, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             cursor: pointer;
+            /* Use will-change only on hover to prevent unnecessary compositing */
         }
 
         .itinerary-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(201, 255, 65, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(201, 255, 65, 0.15);
             border-color: rgba(201, 255, 65, 0.3);
+            will-change: transform;
         }
 
+        /* Image optimizations */
         .itinerary-image {
             position: relative;
             height: 250px;
@@ -172,11 +169,14 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.4s ease;
+            /* Prevent layout shift */
+            display: block;
         }
 
+        /* Simplified hover effect - removed scale to prevent performance issues */
         .itinerary-card:hover .itinerary-image img {
-            transform: scale(1.05);
+            transform: translateY(-2px);
         }
 
         .duration-badge {
@@ -273,7 +273,7 @@
             font-weight: 600;
             font-size: 0.875rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background-color 0.2s ease, color 0.2s ease;
             text-decoration: none;
             display: block;
             text-align: center;
@@ -304,7 +304,7 @@
             font-size: 0.925rem;
             padding: 1rem 2.5rem;
             border-radius: 8px;
-            transition: all 0.3s ease;
+            transition: background-color 0.2s ease, transform 0.2s ease;
             letter-spacing: 0.02em;
             text-transform: uppercase;
             border: none;
@@ -313,10 +313,10 @@
 
         .custom-trip-btn:hover {
             background: #B8E838;
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
 
-        /* Modal Styles */
+        /* Modal Styles - Simplified */
         .modal {
             display: none;
             position: fixed;
@@ -326,14 +326,13 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
         }
 
         .modal.show {
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.2s ease;
         }
 
         @keyframes fadeIn {
@@ -349,11 +348,11 @@
             max-width: 600px;
             border: 1px solid rgba(201, 255, 65, 0.2);
             position: relative;
-            animation: slideUp 0.3s ease;
+            animation: slideUp 0.2s ease;
         }
 
         @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
+            from { transform: translateY(20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
 
@@ -372,7 +371,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            transition: all 0.3s ease;
+            transition: color 0.2s ease, background-color 0.2s ease;
         }
 
         .modal-close:hover {
@@ -430,7 +429,7 @@
             color: var(--text-light);
             font-family: inherit;
             font-size: 0.925rem;
-            transition: all 0.3s ease;
+            transition: border-color 0.2s ease;
         }
 
         .form-input:focus,
@@ -438,7 +437,6 @@
         .form-textarea:focus {
             outline: none;
             border-color: var(--accent-green);
-            box-shadow: 0 0 0 3px rgba(201, 255, 65, 0.1);
         }
 
         .form-textarea {
@@ -457,12 +455,32 @@
             text-transform: uppercase;
             letter-spacing: 0.02em;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background-color 0.2s ease;
             margin-top: 1rem;
         }
 
         .form-submit:hover {
             background: #B8E838;
+        }
+
+        /* Image loading optimization */
+        img {
+            /* Prevent layout shift during image load */
+            background-color: var(--surface-dark);
+        }
+
+        /* Lazy loading placeholder */
+        .itinerary-image[data-loaded="false"] {
+            background: var(--surface-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .itinerary-image[data-loaded="false"]::before {
+            content: "Loading...";
+            color: var(--text-muted);
+            font-size: 0.875rem;
         }
 
         /* Mobile Responsive */
@@ -493,6 +511,22 @@
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
+        }
+
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Performance: Only use GPU acceleration when necessary */
+        .itinerary-card:hover,
+        .modal.show,
+        .modal-content {
+            will-change: auto;
         }
     </style>
 </head>
@@ -525,8 +559,11 @@
                 
                 <!-- Safari Option A -->
                 <div class="itinerary-card">
-                    <div class="itinerary-image">
-                        <img src="images/optiona.png" alt="Okavango Discovery Safari" onerror="this.src='https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=400&h=300&fit=crop'">
+                    <div class="itinerary-image" data-loaded="false">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect width='100%25' height='100%25' fill='%23333'/%3E%3C/svg%3E" 
+                             data-src="images/optiona.png" 
+                             alt="Okavango Discovery Safari" 
+                             loading="lazy">
                         <div class="duration-badge">10 DAYS</div>
                     </div>
                     <div class="itinerary-content">
@@ -549,8 +586,11 @@
 
                 <!-- Safari Option B -->
                 <div class="itinerary-card">
-                    <div class="itinerary-image">
-                        <img src="images/optionb.png" alt="Victoria Falls Adventure Safari" onerror="this.src='https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&h=300&fit=crop'">
+                    <div class="itinerary-image" data-loaded="false">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect width='100%25' height='100%25' fill='%23333'/%3E%3C/svg%3E" 
+                             data-src="images/optionb.png" 
+                             alt="Victoria Falls Adventure Safari" 
+                             loading="lazy">
                         <div class="duration-badge">11 DAYS</div>
                     </div>
                     <div class="itinerary-content">
@@ -573,8 +613,11 @@
 
                 <!-- Safari Option C -->
                 <div class="itinerary-card">
-                    <div class="itinerary-image">
-                        <img src="images/optionc.png" alt="Luxury Wildlife Experience Safari" onerror="this.src='https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=400&h=300&fit=crop'">
+                    <div class="itinerary-image" data-loaded="false">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect width='100%25' height='100%25' fill='%23333'/%3E%3C/svg%3E" 
+                             data-src="images/optionc.png" 
+                             alt="Luxury Wildlife Experience Safari" 
+                             loading="lazy">
                         <div class="duration-badge">12 DAYS</div>
                     </div>
                     <div class="itinerary-content">
@@ -597,8 +640,11 @@
 
                 <!-- Safari Option D -->
                 <div class="itinerary-card">
-                    <div class="itinerary-image">
-                        <img src="images/optiond.png" alt="Ultimate Southern Africa Safari" onerror="this.src='https://images.unsplash.com/photo-1534177616072-ef7dc120449d?w=400&h=300&fit=crop'">
+                    <div class="itinerary-image" data-loaded="false">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect width='100%25' height='100%25' fill='%23333'/%3E%3C/svg%3E" 
+                             data-src="images/optiond.png" 
+                             alt="Ultimate Southern Africa Safari" 
+                             loading="lazy">
                         <div class="duration-badge">14 DAYS</div>
                     </div>
                     <div class="itinerary-content">
@@ -683,24 +729,62 @@
     </div>
 
     <script>
+        // Optimized image lazy loading
+        function loadImages() {
+            const images = document.querySelectorAll('img[data-src]');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        const container = img.closest('.itinerary-image');
+                        
+                        img.src = img.dataset.src;
+                        img.onload = () => {
+                            container.setAttribute('data-loaded', 'true');
+                        };
+                        img.onerror = () => {
+                            // Fallback to Unsplash if local image fails
+                            const fallbackSrc = img.alt.includes('Victoria Falls') 
+                                ? 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&h=300&fit=crop'
+                                : img.alt.includes('Luxury Wildlife') 
+                                ? 'https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=400&h=300&fit=crop'
+                                : img.alt.includes('Ultimate Southern') 
+                                ? 'https://images.unsplash.com/photo-1534177616072-ef7dc120449d?w=400&h=300&fit=crop'
+                                : 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=400&h=300&fit=crop';
+                            
+                            img.src = fallbackSrc;
+                            container.setAttribute('data-loaded', 'true');
+                        };
+                        
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => imageObserver.observe(img));
+        }
+
+        // Modal functions - optimized
         function openModal() {
-            document.getElementById('enquiryModal').classList.add('show');
+            const modal = document.getElementById('enquiryModal');
+            modal.classList.add('show');
             document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
-            document.getElementById('enquiryModal').classList.remove('show');
+            const modal = document.getElementById('enquiryModal');
+            modal.classList.remove('show');
             document.body.style.overflow = 'auto';
         }
 
-        // Close modal when clicking outside
-        document.getElementById('enquiryModal').addEventListener('click', function(e) {
-            if (e.target === this) {
+        // Event listeners - using event delegation for better performance
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('enquiryModal');
+            if (e.target === modal) {
                 closeModal();
             }
         });
 
-        // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
@@ -710,18 +794,20 @@
         function submitEnquiry(event) {
             event.preventDefault();
             
-            // Get form data
             const formData = new FormData(event.target);
             const data = Object.fromEntries(formData);
             
-            // Here you would typically send the data to your server
             console.log('Enquiry data:', data);
             
-            // For now, just show an alert and close modal
             alert('Thank you for your enquiry! We will get back to you soon.');
             closeModal();
             event.target.reset();
         }
+
+        // Initialize on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', function() {
+            loadImages();
+        });
     </script>
 </body>
 </html>
