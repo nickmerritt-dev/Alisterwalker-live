@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Brunswick Camps - Alister Walker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #212121;
+            --accent-green: #C9FF41;
+            --text-light: #E7E7E7;
+            --text-muted: #A0A0A0;
+            --surface-dark: #1A1A1A;
+            --surface-elevated: #2A2A2A;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.7;
+            font-weight: 400;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(33, 33, 33, 0.95);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(201, 255, 65, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .logo {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--accent-green);
+            letter-spacing: -0.02em;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.875rem;
+            letter-spacing: 0.01em;
+            transition: color 0.2s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-green);
+        }
+
+        .nav-links a.active {
+            color: var(--accent-green);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 8rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        /* Header Section */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-category {
+            font-size: 0.875rem;
+            color: var(--accent-green);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .page-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            letter-spacing: -0.03em;
+        }
+
+        .page-subtitle {
+            font-size: 1.125rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 900px;
+            line-height: 1.6;
+            letter-spacing: -0.01em;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Camp Overview Section */
+        .camp-overview {
+            background: var(--surface-elevated);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            border: 1px solid rgba(201, 255, 65, 0.1);
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .camp-details h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .camp-details p {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .key-info {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .info-item {
+            background: rgba(201, 255, 65, 0.05);
+            border: 1px solid rgba(201, 255, 65, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        .price-highlight {
+            color: var(--accent-green);
+            font-size: 1.5rem;
+        }
+
+        /* Weeks Grid */
+        .weeks-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 2rem;
+            text-align: center;
+            letter-spacing: -0.02em;
+        }
+
+        .weeks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .week-card {
+            background: var(--surface-elevated);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(201, 255, 65, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .week-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(201, 255, 65, 0.15);
+            border-color: rgba(201, 255, 65, 0.3);
+        }
+
+        .week-badge {
+            background: var(--accent-green);
+            color: var(--primary-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .week-dates {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .week-schedule {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .availability {
+            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .available {
+            background: rgba(201, 255, 65, 0.1);
+            color: var(--accent-green);
+            border: 1px solid rgba(201, 255, 65, 0.3);
+        }
+
+        .limited {
+            background: rgba(255, 165, 0, 0.1);
+            color: #FFB84D;
+            border: 1px solid rgba(255, 165, 0, 0.3);
+        }
+
+        /* Coaches Section */
+        .coaches-section {
+            margin-bottom: 4rem;
+        }
+
+        .coaches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .coach-card {
+            background: var(--surface-elevated);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(201, 255, 65, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .coach-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(201, 255, 65, 0.1);
+        }
+
+        .coach-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .coach-title {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .coach-bio {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Requirements Section */
+        .requirements-section {
+            background: rgba(201, 255, 65, 0.05);
+            border: 1px solid rgba(201, 255, 65, 0.2);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .requirements-section h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+
+        .rating-requirement {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .requirements-note {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Registration CTA */
+        .registration-cta {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid rgba(201, 255, 65, 0.1);
+            margin-top: 4rem;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .register-btn {
+            display: inline-flex;
+            align-items: center;
+            background: var(--accent-green);
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.925rem;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+        }
+
+        .register-btn:hover {
+            background: #B8E838;
+            transform: translateY(-1px);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--surface-elevated);
+            border-radius: 16px;
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 600px;
+            border: 1px solid rgba(201, 255, 65, 0.2);
+            position: relative;
+            animation: slideUp 0.2s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--accent-green);
+            background: rgba(201, 255, 65, 0.1);
+        }
+
+        .modal-header {
+            margin-bottom: 2rem;
+        }
+
+        .modal-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .registration-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            background: var(--surface-dark);
+            border: 1px solid rgba(201, 255, 65, 0.2);
+            border-radius: 8px;
+            padding: 0.875rem 1rem;
+            color: var(--text-light);
+            font-family: inherit;
+            font-size: 0.925rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-green);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            background: var(--accent-green);
+            color: var(--primary-dark);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.925rem;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top: 1rem;
+        }
+
+        .form-submit:hover {
+            background: #B8E838;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .camp-overview {
+                padding: 2rem;
+            }
+
+            .weeks-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .coaches-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .modal-content {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .requirements-section {
+                padding: 2rem;
+            }
+        }
+
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Alister Walker</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="itineraries.html">Itineraries</a></li>
+                <li><a href="camps.html" class="active">Camps</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Header -->
+            <div class="page-header">
+                <div class="page-category">Summer 2026</div>
+                <h1 class="page-title">Elite Brunswick Camps</h1>
+                <p class="page-subtitle">Intensive training programs designed to accelerate your development through world-class instruction and championship methodology. Train alongside elite coaches from Ivy League and NESCAC programs in an environment focused on technical mastery and competitive excellence.</p>
+            </div>
+
+            <!-- Camp Overview -->
+            <div class="camp-overview">
+                <div class="overview-grid">
+                    <div class="camp-details">
+                        <h2>Championship Training Intensive</h2>
+                        <p>Elite Brunswick Camps represent the pinnacle of junior squash development, combining world-class instruction with intensive training methodology proven at the highest levels of collegiate and professional competition.</p>
+                        <p>Each camp week features morning technical sessions focused on stroke mechanics and tactical development, complemented by afternoon competitive training and match play analysis.</p>
+                        <p>Limited to players with demonstrated competitive ability to ensure optimal training environment and peer-level competition.</p>
+                    </div>
+                    <div class="key-info">
+                        <div class="info-item">
+                            <div class="info-label">Training Schedule</div>
+                            <div class="info-value">9-11am & 1-3pm<br>Monday - Friday</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Investment</div>
+                            <div class="info-value price-highlight">$1,200</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Minimum Rating</div>
+                            <div class="info-value">4.5 Competitive Level</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Location</div>
+                            <div class="info-value">Brunswick Elite Facilities<br>New England</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Available Weeks -->
+            <div class="weeks-section">
+                <h2 class="section-title">Available Training Weeks</h2>
+                <div class="weeks-grid">
+                    <div class="week-card">
+                        <div class="week-badge">Week 1</div>
+                        <div class="week-dates">August 10-14, 2026</div>
+                        <div class="week-schedule">Daily sessions: 9-11am & 1-3pm</div>
+                        <div class="availability available">Open for Registration</div>
+                    </div>
+                    
+                    <div class="week-card">
+                        <div class="week-badge">Week 2</div>
+                        <div class="week-dates">August 17-21, 2026</div>
+                        <div class="week-schedule">Daily sessions: 9-11am & 1-3pm</div>
+                        <div class="availability available">Open for Registration</div>
+                    </div>
+                    
+                    <div class="week-card">
+                        <div class="week-badge">Week 3</div>
+                        <div class="week-dates">August 24-28, 2026</div>
+                        <div class="week-schedule">Daily sessions: 9-11am & 1-3pm</div>
+                        <div class="availability limited">Limited Availability</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Elite Coaching Staff -->
+            <div class="coaches-section">
+                <h2 class="section-title">Elite Coaching Staff</h2>
+                <div class="coaches-grid">
+                    <div class="coach-card">
+                        <div class="coach-name">Alister Walker</div>
+                        <div class="coach-title">Head Coach • Former World #12</div>
+                        <div class="coach-bio">28 years competitive excellence, 15 years coaching mastery. Former Columbia University coach who led team to first-ever Ivy League Championship. Specialist in developing championship-level technical and tactical foundations.</div>
+                    </div>
+                    
+                    <div class="coach-card">
+                        <div class="coach-name">David Pearson</div>
+                        <div class="coach-title">Elite Performance Coach</div>
+                        <div class="coach-bio">Renowned for developing junior champions and collegiate recruits. Expert in competitive psychology and advanced tactical systems. Extensive experience with top-level tournament preparation and peak performance methodology.</div>
+                    </div>
+                    
+                    <div class="coach-card">
+                        <div class="coach-name">Guest Coaches</div>
+                        <div class="coach-title">Ivy League & NESCAC Programs</div>
+                        <div class="coach-bio">Rotating selection of current Ivy League and NESCAC head coaches and assistant coaches. Provides invaluable insights into collegiate recruitment, expectations, and the pathway to elite university programs.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Requirements -->
+            <div class="requirements-section">
+                <h2>Training Requirements</h2>
+                <div class="rating-requirement">Minimum Rating: 4.5</div>
+                <div class="requirements-note">
+                    This intensive training environment is designed for competitive players with demonstrated ability and commitment to excellence. The minimum 4.5 rating ensures all participants can engage effectively with advanced technical instruction and high-level competitive training sessions.
+                </div>
+            </div>
+
+            <!-- Registration CTA -->
+            <div class="registration-cta">
+                <h2 class="cta-title">Secure Your Position</h2>
+                <p class="cta-subtitle">Limited spaces available. Elite training demands optimal group sizes for maximum development and individual attention.</p>
+                <button class="register-btn" onclick="openModal()">Register Now</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h2 class="modal-title">Camp Registration</h2>
+                <p class="modal-subtitle">Register for Elite Brunswick Camps 2026</p>
+            </div>
+            <form class="registration-form" onsubmit="submitRegistration(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Player First Name</label>
+                        <input type="text" class="form-input" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Player Last Name</label>
+                        <input type="text" class="form-input" name="lastName" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Age</label>
+                        <input type="number" class="form-input" name="age" min="12" max="18" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Current Rating</label>
+                        <select class="form-select" name="rating" required>
+                            <option value="">Select rating</option>
+                            <option value="4.5">4.5</option>
+                            <option value="5.0">5.0</option>
+                            <option value="5.5">5.5</option>
+                            <option value="6.0">6.0</option>
+                            <option value="6.5+">6.5+</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Preferred Week</label>
+                    <select class="form-select" name="week" required>
+                        <option value="">Select week</option>
+                        <option value="week1">Week 1: August 10-14</option>
+                        <option value="week2">Week 2: August 17-21</option>
+                        <option value="week3">Week 3: August 24-28</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Parent/Guardian Email</label>
+                        <input type="email" class="form-input" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Contact Phone</label>
+                        <input type="tel" class="form-input" name="phone" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Playing Experience & Goals</label>
+                    <textarea class="form-textarea" name="experience" placeholder="Please describe your competitive playing history, current training, and goals for the camp experience..." required></textarea>
+                </div>
+                <button type="submit" class="form-submit">Submit Registration</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal functions
+        function openModal() {
+            const modal = document.getElementById('registrationModal');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('registrationModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Event listeners
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('registrationModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        function submitRegistration(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            console.log('Registration data:', data);
+            
+            alert('Thank you for your registration! We will contact you within 24 hours to confirm your spot and provide next steps.');
+            closeModal();
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
