@@ -1788,20 +1788,54 @@
         });
 
         function submitContact(event) {
-            event.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData);
-            
-            // Here you would typically send the data to your server
-            console.log('Contact data:', data);
-            
-            // For now, just show an alert and close modal
-            alert('Thank you for your message! I will get back to you soon.');
-            closeModal();
-            event.target.reset();
-        }
+    event.preventDefault();
+    
+    // Get the submit button for loading state
+    const submitBtn = event.target.querySelector('.form-submit');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+    
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+    
+    // Create form and submit to Web3Forms
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://api.web3forms.com/submit';
+    form.target = '_blank';
+    
+    // Add all the form fields
+    const fields = {
+        'access_key': 'b74d56e1-bc4b-4d03-bb02-864ef6bbcafe',
+        'subject': 'New Contact from Elite Squash Website',
+        'name': data.name,
+        'email': data.email,
+        'phone': data.phone || 'Not provided',
+        'message': data.message,
+        'redirect': 'https://web3forms.com/success'
+    };
+    
+    for (const [key, value] of Object.entries(fields)) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = value;
+        form.appendChild(input);
+    }
+    
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+    
+    // Reset form and close modal after a delay
+    setTimeout(() => {
+        event.target.reset();
+        closeModal();
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }, 1000);
+}
 
         // Mobile menu toggle
         function toggleMobileMenu() {
