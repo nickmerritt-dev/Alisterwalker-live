@@ -855,12 +855,13 @@ function closeModal() {
     // Prepare the data for Web3Forms
     const formPayload = {
         access_key: "b74d56e1-bc4b-4d03-bb02-864ef6bbcafe",
+        email: "goodeyemedia5@gmail.com",  // <-- ADD THIS LINE with your email
         subject: "New Custom Trip Enquiry - Squash Safari",
         from_name: `${data.firstName} ${data.lastName}`,
         // Include all form fields
         first_name: data.firstName,
         last_name: data.lastName,
-        email: data.email,
+        client_email: data.email,  // Changed from 'email' to 'client_email' to avoid conflict
         phone: data.phone || "Not provided",
         duration: data.duration || "Not specified",
         travel_dates: data.travelDates || "Flexible",
